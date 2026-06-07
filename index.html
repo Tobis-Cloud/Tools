@@ -170,14 +170,16 @@
         /* BUTTON STYLING (Relativ klein & edel) */
         .tool-btn {
             position: relative;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
             width: 100%;
-            padding: 14px 20px;
+            padding: 12px 16px;
             font-size: 0.95rem;
             font-weight: 600;
             color: #ffffff;
             text-decoration: none;
-            text-align: center;
             border-radius: 12px; /* Abgerundete Ecken */
             background: rgba(20, 18, 25, 0.8); /* Dunkler, leicht transparenter Hintergrund */
             border: 1px solid transparent;
@@ -185,6 +187,15 @@
             transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
                         box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
+        }
+
+        /* Styling für das App-Icon */
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: rgba(255, 255, 255, 0.1); /* Fallback-Hintergrund */
         }
 
         /* Farbverlauf als Rahmen über ein Pseudo-Element (für abgerundete Gradient-Rahmen) */
@@ -231,12 +242,30 @@
         </header>
 
         <main class="button-list">
-            <a href="https://tobis-cloud.github.io/binokel/" class="tool-btn">Binokel</a>
-            <a href="https://tobis-cloud.github.io/training/" class="tool-btn">Training</a>
-            <a href="https://tobis-cloud.github.io/StilleZeit/" class="tool-btn">Stille Zeit</a>
-            <a href="https://tobis-cloud.github.io/Top10/" class="tool-btn">Top 10</a>
-            <a href="https://tobis-cloud.github.io/kniffel/" class="tool-btn">Kniffel</a>
-            <a href="https://tobis-cloud.github.io/GluecksRad/" class="tool-btn">Glücksrad</a>
+            <a href="https://tobis-cloud.github.io/binokel/" class="tool-btn">
+                <img src="binokel.jpeg" alt="Binokel" class="btn-icon">
+                <span>Binokel</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/training/" class="tool-btn">
+                <img src="training.jpeg" alt="Training" class="btn-icon">
+                <span>Training</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/StilleZeit/" class="tool-btn">
+                <img src="Stille.jpeg" alt="Stille Zeit" class="btn-icon">
+                <span>Stille Zeit</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/Top10/" class="tool-btn">
+                <img src="Top10.jpeg" alt="Top 10" class="btn-icon">
+                <span>Top 10</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/kniffel/" class="tool-btn">
+                <img src="Kniffel.jpeg" alt="Kniffel" class="btn-icon">
+                <span>Kniffel</span>
+            </a>
+            <a href="https://tobis-cloud.github.io/GluecksRad/" class="tool-btn">
+                <img src="Rad.jpeg" alt="Glücksrad" class="btn-icon">
+                <span>Glücksrad</span>
+            </a>
         </main>
 
     </div>
