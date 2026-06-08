@@ -53,7 +53,7 @@
             overflow-x: hidden;
         }
 
-        /* HINTERGRUND-CONTAINER FÜR ANIMIERTE BLOBS (KI-Style wie bei Gemini) */
+        /* HINTERGRUND-CONTAINER FÜR ANIMIERTE BLOBS */
         .glow-bg {
             position: fixed;
             top: 0;
@@ -61,12 +61,11 @@
             width: 100%;
             height: 100%;
             background-color: #000000;
-            z-index: 0; /* Auf Ebene 0 setzen, da Body-Hintergrund dahinter liegt */
+            z-index: 0;
             overflow: hidden;
             pointer-events: none;
         }
 
-        /* Die wabernden Licht-Blobs (Hardware-beschleunigt mit transform) */
         .blob {
             position: absolute;
             width: 450px;
@@ -74,7 +73,7 @@
             border-radius: 50%;
             mix-blend-mode: screen;
             filter: blur(100px);
-            opacity: 0.22; /* Höhere Opazität für deutlichere Sichtbarkeit */
+            opacity: 0.22;
             pointer-events: none;
         }
 
@@ -82,24 +81,23 @@
             background-color: var(--color-purple);
             top: -10%;
             left: -10%;
-            animation: move-purple 15s infinite alternate ease-in-out; /* Schnellere Animation (15s statt 22s) */
+            animation: move-purple 15s infinite alternate ease-in-out;
         }
 
         .blob-pink {
             background-color: var(--color-pink);
             bottom: -10%;
             right: -10%;
-            animation: move-pink 12s infinite alternate ease-in-out; /* Schnellere Animation (12s statt 18s) */
+            animation: move-pink 12s infinite alternate ease-in-out;
         }
 
         .blob-red {
             background-color: var(--color-red);
             top: 35%;
             left: 20%;
-            animation: move-red 18s infinite alternate ease-in-out; /* Schnellere Animation (18s statt 25s) */
+            animation: move-red 18s infinite alternate ease-in-out;
         }
 
-        /* Wabernde Bewegungs-Animationen (größere Bewegungsradien) */
         @keyframes move-purple {
             0% { transform: translate3d(0, 0, 0) scale(1); }
             50% { transform: translate3d(120px, 80px, 0) scale(1.2); }
@@ -121,10 +119,10 @@
         /* CONTAINER FÜR MOBILE OPTIMIERUNG */
         .container {
             width: 100%;
-            max-width: 400px; /* Perfekte Breite für alle Handys */
-            z-index: 2; /* Höher als der Hintergrund (.glow-bg = 0) */
-            position: relative; /* Erforderlich, damit z-index wirkt */
-            display: flex;
+            max-width: 400px;
+            z-index: 2;
+            position: relative;
+            display: none; /* Standardmäßig ausgeblendet, bis Passwort korrekt ist */
             flex-direction: column;
             align-items: center;
         }
@@ -139,14 +137,10 @@
             font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            
-            /* Schöner Farbverlauf auf der Schrift */
             background: linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            
-            /* Subtiler Glow-Effekt für die Schrift */
             text-shadow: 0 0 40px rgba(236, 72, 153, 0.2);
         }
 
@@ -164,10 +158,10 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 16px; /* Abstand zwischen den Buttons */
+            gap: 16px;
         }
 
-        /* BUTTON STYLING (Relativ klein & edel) */
+        /* BUTTON STYLING */
         .tool-btn {
             position: relative;
             display: flex;
@@ -180,8 +174,8 @@
             font-weight: 600;
             color: #ffffff;
             text-decoration: none;
-            border-radius: 12px; /* Abgerundete Ecken */
-            background: rgba(20, 18, 25, 0.8); /* Dunkler, leicht transparenter Hintergrund */
+            border-radius: 12px;
+            background: rgba(20, 18, 25, 0.8);
             border: 1px solid transparent;
             background-clip: padding-box;
             transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
@@ -189,40 +183,104 @@
             z-index: 1;
         }
 
-        /* Styling für das App-Icon */
         .btn-icon {
             width: 32px;
             height: 32px;
             border-radius: 8px;
             object-fit: cover;
-            background-color: rgba(255, 255, 255, 0.1); /* Fallback-Hintergrund */
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Farbverlauf als Rahmen über ein Pseudo-Element (für abgerundete Gradient-Rahmen) */
         .tool-btn::before {
             content: '';
             position: absolute;
             top: -1px; left: -1px; right: -1px; bottom: -1px;
             z-index: -1;
             border-radius: 12px;
-            /* Farbverlauf auf dem Rahmen */
             background: linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-red));
-            opacity: 0.4; /* Standardmäßig leicht gedimmt */
+            opacity: 0.4;
             transition: opacity 0.2s ease;
         }
 
-        /* AKTIV- & HOVER-STATI FÜR TOUCH/MAUS */
         .tool-btn:hover::before,
         .tool-btn:active::before {
-            opacity: 1; /* Farbverlauf leuchtet voll auf */
+            opacity: 1;
         }
 
         .tool-btn:hover,
         .tool-btn:active {
-            transform: scale(1.02); /* Minimales Vergrößern beim Tippen/Hovern */
-            /* Glow-Effekt nach außen */
+            transform: scale(1.02);
             box-shadow: 0 6px 20px rgba(236, 72, 153, 0.15);
-            background: rgba(30, 27, 38, 0.9); /* Macht den Hintergrund beim Tippen minimal heller */
+            background: rgba(30, 27, 38, 0.9);
+        }
+
+        /* PASSWORT FORMULAR STYLING */
+        .login-box {
+            position: relative;
+            z-index: 3;
+            background: rgba(20, 18, 25, 0.8);
+            padding: 30px 20px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 15vh;
+        }
+
+        .login-box h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+
+        .login-box p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            font-family: 'Outfit', sans-serif;
+            transition: border-color 0.2s;
+        }
+
+        .login-box input:focus {
+            border-color: var(--color-pink);
+        }
+
+        .login-box button {
+            background: linear-gradient(135deg, var(--color-purple), var(--color-pink), var(--color-red));
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            transition: transform 0.1s;
+        }
+
+        .login-box button:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
@@ -234,7 +292,14 @@
         <div class="blob blob-red"></div>
     </div>
 
-    <div class="container">
+    <div id="loginBox" class="login-box">
+        <h2>Geschützter Bereich</h2>
+        <p>Bitte gib das Passwort ein, um fortzufahren.</p>
+        <input type="password" id="passwordInput" placeholder="Passwort">
+        <button onclick="checkPassword()">Freischalten</button>
+    </div>
+
+    <div id="mainContainer" class="container">
         
         <header>
             <h1>Tobi - Tools</h1>
@@ -277,6 +342,27 @@
         </main>
 
     </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("passwordInput").value;
+            
+            // Hier dein gewünschtes Passwort eintragen
+            if (password === "SoliDeoGloria") { 
+                document.getElementById("loginBox").style.display = "none";
+                document.getElementById("mainContainer").style.display = "flex";
+            } else {
+                alert("Falsches Passwort!");
+            }
+        }
+
+        // Aktiviert den Button auch bei Drücken der Enter-Taste
+        document.getElementById("passwordInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
 
 </body>
 </html>
